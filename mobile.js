@@ -5,8 +5,8 @@
 Office.onReady();
 
 const CORBE_AUTH = {
-  clientId: "11d4d023-0187-483e-aa31-9b3f55153aee",
-  authority: "https://login.microsoftonline.com/75b354dc-0810-4caa-90a3-ac64ef88c77a",
+  clientId: "4e53fe58-6711-4d92-b141-c90f8ca3b550",
+  authority: "https://login.microsoftonline.com/63fb9113-5dd8-452e-9c0b-279a1e9170cc",
   redirectUri: "https://xaviouk.github.io/corbe44-signature-mobile/auth.html"
 };
 let corbePcaPromise;
