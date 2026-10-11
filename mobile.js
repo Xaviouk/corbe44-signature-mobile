@@ -83,11 +83,7 @@ const corbeSignatureTemplate = String.raw`<!DOCTYPE html>
 <td width="78" valign="top" nowrap
     style="width:78px;min-width:78px;max-width:78px;padding:0 10px 0 20px;white-space:nowrap;">
   <div style="font-size:0;line-height:0;width:78px;height:108px;overflow:hidden;">
-    <img src="{{PHOTO_URL}}"
-         alt="{{DISPLAY_NAME_HTML}}" width="78" height="108"
-         style="display:block;width:78px;height:108px;border:0;margin:0;padding:0;
-                max-width:none;max-height:none;min-width:0;min-height:0;
-                -ms-interpolation-mode:bicubic;">
+    {{PHOTO_HTML}}
   </div>
 </td>
 
@@ -375,9 +371,10 @@ function renderSignature(profile, graph) {
   const phoneRaw = String((graph && graph.mobilePhone) || (graph && graph.businessPhones && graph.businessPhones[0]) || "").trim();
   const phone = formatPhone(phoneRaw);
   const phoneDigits = digits(phoneRaw);
-  const photoUrl = email ? "https://www.corbe-cuisine-pro.com/wp-content/uploads/" + encodeURIComponent(email) + "_.png" : "https://www.corbe-cuisine-pro.com/wp-content/uploads/xavier.gaillard@corbe44.fr_.png";
+  // Aucune photo de secours : si l’e-mail manque, ne pas afficher de photo.
+  const photoHtml = email ? '<img src="https://www.corbe-cuisine-pro.com/wp-content/uploads/' + email + '_.png" alt="' + escapeHtml(displayName) + '" width="78" height="108" style="display:block;width:78px;height:108px;border:0;margin:0;padding:0;max-width:none;max-height:none;min-width:0;min-height:0;-ms-interpolation-mode:bicubic;">' : "";
   const replacements = {
-    "{{PHOTO_URL}}": photoUrl,
+    "{{PHOTO_HTML}}": photoHtml,
     "{{DISPLAY_NAME_HTML}}": escapeHtml(displayName).replace(/ /g, "&nbsp;"),
     "{{JOB_TITLE_HTML}}": escapeHtml(jobTitle),
     "{{EMAIL_ATTR}}": email,
