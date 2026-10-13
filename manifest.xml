@@ -5,7 +5,7 @@
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
   xsi:type="MailApp">
   <Id>CAC30912-A6EC-4F1A-BD18-5554786BAE13</Id>
-  <Version>1.1.0.5</Version>
+  <Version>1.1.0.6</Version>
   <ProviderName>CORBÉ 44</ProviderName>
   <DefaultLocale>fr-FR</DefaultLocale>
   <DisplayName DefaultValue="CORBÉ 44 — Signature mobile"/>
@@ -53,7 +53,28 @@
             </Runtime>
           </Runtimes>
           <DesktopFormFactor>
-            <FunctionFile resid="Autorun"/>
+            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
+              <OfficeTab id="TabDefault">
+                <Group id="corbe44Group">
+                  <Label resid="residGroupLabel"/>
+                  <Control xsi:type="Button" id="corbe44Button">
+                    <Label resid="residButtonLabel"/>
+                    <Supertip>
+                      <Title resid="residButtonLabel"/>
+                      <Description resid="residButtonDescription"/>
+                    </Supertip>
+                    <Icon>
+                      <bt:Image size="16" resid="Icon16x16"/>
+                      <bt:Image size="32" resid="Icon32x32"/>
+                      <bt:Image size="80" resid="Icon80x80"/>
+                    </Icon>
+                    <Action xsi:type="ShowTaskpane">
+                      <SourceLocation resid="taskpaneUrl"/>
+                    </Action>
+                  </Control>
+                </Group>
+              </OfficeTab>
+            </ExtensionPoint>
           </DesktopFormFactor>
           <MobileFormFactor>
             <ExtensionPoint xsi:type="LaunchEvent">
@@ -72,11 +93,17 @@
           <bt:Image id="Icon80x80" DefaultValue="https://officedev.github.io/Office-Add-in-samples/Samples/outlook-set-signature/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
+          <bt:Url id="taskpaneUrl" DefaultValue="https://xaviouk.github.io/corbe44-signature-mobile/mobile.html"/>
           <bt:Url id="Autorun" DefaultValue="https://xaviouk.github.io/corbe44-signature-mobile/mobile.html"/>
           <bt:Url id="runtimeJs" DefaultValue="https://xaviouk.github.io/corbe44-signature-mobile/mobile.js"/>
         </bt:Urls>
+        <bt:ShortStrings>
+          <bt:String id="residGroupLabel" DefaultValue="CORBÉ 44"/>
+          <bt:String id="residButtonLabel" DefaultValue="Signature CORBÉ 44"/>
+        </bt:ShortStrings>
         <bt:LongStrings>
           <bt:String id="residAppDesc" DefaultValue="Complément Outlook mobile de signature automatique CORBÉ 44."/>
+          <bt:String id="residButtonDescription" DefaultValue="Ouvre le complément de signature CORBÉ 44."/>
         </bt:LongStrings>
       </Resources>
     </VersionOverrides>
