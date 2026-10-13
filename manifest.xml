@@ -52,6 +52,9 @@
               <Override type="javascript" resid="runtimeJs"/>
             </Runtime>
           </Runtimes>
+          <DesktopFormFactor>
+            <FunctionFile resid="runtimeJs"/>
+          </DesktopFormFactor>
           <MobileFormFactor>
             <ExtensionPoint xsi:type="LaunchEvent">
               <LaunchEvents>
