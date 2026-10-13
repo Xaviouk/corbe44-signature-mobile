@@ -1,6 +1,7 @@
-/* CORBÉ 44 — Signature mobile dynamique
- * Récupère le profil Microsoft 365 via Microsoft Graph avec MSAL Nested App Authentication.
- * En cas d'échec d'authentification, conserve les informations Outlook disponibles sans inventer de fonction ni de téléphone.
+/* CORBÉ 44 — Signature mobile
+ * Signature automatique à la création d'un nouveau message Outlook mobile.
+ * Les informations du profil sont lues via Microsoft Graph (User.Read) ; en cas d'échec,
+ * le nom et l'adresse e-mail disponibles dans Outlook restent utilisés.
  */
 Office.onReady();
 
