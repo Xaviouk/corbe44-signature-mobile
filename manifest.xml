@@ -5,11 +5,11 @@
   xmlns:mailappor="http://schemas.microsoft.com/office/mailappversionoverrides"
   xsi:type="MailApp">
   <Id>CAC30912-A6EC-4F1A-BD18-5554786BAE13</Id>
-  <Version>1.0.0.0</Version>
-  <ProviderName>CORBÉ 44 — Signature mobile</ProviderName>
+  <Version>1.1.0.0</Version>
+  <ProviderName>CORBÉ 44</ProviderName>
   <DefaultLocale>fr-FR</DefaultLocale>
   <DisplayName DefaultValue="CORBÉ 44 — Signature mobile"/>
-  <Description DefaultValue="Insertion automatique de la signature CORBÉ 44 dans Outlook mobile."/>
+  <Description DefaultValue="Complément Outlook mobile de signature automatique CORBÉ 44."/>
   <IconUrl DefaultValue="https://officedev.github.io/Office-Add-in-samples/Samples/outlook-set-signature/assets/icon-64.png"/>
   <HighResolutionIconUrl DefaultValue="https://officedev.github.io/Office-Add-in-samples/Samples/outlook-set-signature/assets/icon-128.png"/>
   <SupportUrl DefaultValue="https://learn.microsoft.com/fr-fr/office/dev/add-ins/outlook/mobile-event-based"/>
@@ -52,30 +52,6 @@
               <Override type="javascript" resid="runtimeJs"/>
             </Runtime>
           </Runtimes>
-          <DesktopFormFactor>
-            <ExtensionPoint xsi:type="MessageComposeCommandSurface">
-              <OfficeTab id="TabDefault">
-                <Group id="testGroup">
-                  <Label resid="residGroupLabel"/>
-                  <Control xsi:type="Button" id="testButton">
-                    <Label resid="residButtonLabel"/>
-                    <Supertip>
-                      <Title resid="residButtonLabel"/>
-                      <Description resid="residButtonDescription"/>
-                    </Supertip>
-                    <Icon>
-                      <bt:Image size="16" resid="Icon16x16"/>
-                      <bt:Image size="32" resid="Icon32x32"/>
-                      <bt:Image size="80" resid="Icon80x80"/>
-                    </Icon>
-                    <Action xsi:type="ShowTaskpane">
-                      <SourceLocation resid="taskpaneUrl"/>
-                    </Action>
-                  </Control>
-                </Group>
-              </OfficeTab>
-            </ExtensionPoint>
-          </DesktopFormFactor>
           <MobileFormFactor>
             <ExtensionPoint xsi:type="LaunchEvent">
               <LaunchEvents>
@@ -93,18 +69,13 @@
           <bt:Image id="Icon80x80" DefaultValue="https://officedev.github.io/Office-Add-in-samples/Samples/outlook-set-signature/assets/icon-80.png"/>
         </bt:Images>
         <bt:Urls>
-          <bt:Url id="taskpaneUrl" DefaultValue="https://xaviouk.github.io/corbe44-signature-mobile/mobile.html"/>
           <bt:Url id="Autorun" DefaultValue="https://xaviouk.github.io/corbe44-signature-mobile/mobile.html"/>
           <bt:Url id="runtimeJs" DefaultValue="https://xaviouk.github.io/corbe44-signature-mobile/mobile.js"/>
         </bt:Urls>
         <bt:ShortStrings>
-          <bt:String id="residGroupLabel" DefaultValue="CORBÉ 44 — Signature mobile"/>
-          <bt:String id="residButtonLabel" DefaultValue="Signature CORBÉ 44"/>
+          <bt:String id="residAppDesc" DefaultValue="Complément Outlook mobile de signature automatique CORBÉ 44."/>
         </bt:ShortStrings>
-        <bt:LongStrings>
-          <bt:String id="residAppDesc" DefaultValue="Insertion automatique de la signature CORBÉ 44 dans Outlook mobile."/>
-          <bt:String id="residButtonDescription" DefaultValue="Insère la signature CORBÉ 44 dans un nouveau message."/>
-        </bt:LongStrings>
+        <bt:LongStrings/>
       </Resources>
     </VersionOverrides>
   </VersionOverrides>
