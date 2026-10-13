@@ -1,24 +1,18 @@
 CORBÉ 44 — Signature mobile
 
-ATTENTION : paquet de préparation, non validé dans Outlook. Déployer uniquement sur le compte de test.
+Le dépôt contient le complément CORBÉ 44, avec un manifeste dédié et un identifiant distinct de CORBÉ 49.
 
-Fichiers à publier dans un dépôt GitHub distinct nommé corbe44-signature-mobile :
-- mobile.html
-- mobile.js
-- auth.html
-- manifest.xml
-
-Après publication, vérifier que ces URL s’ouvrent :
-https://xaviouk.github.io/corbe44-signature-mobile/mobile.html
-https://xaviouk.github.io/corbe44-signature-mobile/mobile.js
-https://xaviouk.github.io/corbe44-signature-mobile/auth.html
-
-Manifeste : CAC30912-A6EC-4F1A-BD18-5554786BAE13
-URL brute attendue du manifeste après publication :
+URL du manifeste à fournir lors du déploiement :
 https://raw.githubusercontent.com/Xaviouk/corbe44-signature-mobile/refs/heads/main/manifest.xml
 
-IMPORTANT : l’application Entra utilisée dans le code est actuellement la même que CORBÉ 49. Avant le test d’authentification Graph, ajouter l’URL de redirection
-https://xaviouk.github.io/corbe44-signature-mobile/auth.html
-dans CORBE49-Signature-Mobile (Entra > Authentification > SPA). Le complément a un identifiant Outlook séparé, mais l’authentification Entra reste partagée.
+Page utilisée par Outlook :
+https://xaviouk.github.io/corbe44-signature-mobile/mobile.html
 
-Le profil Graph récupère displayName, jobTitle, mail, mobilePhone et businessPhones. La signature conserve le modèle fourni MGSignature2026Corbe44.htm.
+À vérifier dans le tenant CORBE44 avant déploiement :
+- Application Entra : CORBE44-Signature-Mobile
+- Client ID : 4e53fe58-6711-4d92-b141-c90f8ca3b550
+- Tenant ID : 63fb9113-5dd8-452e-9c0b-279a1e9170cc
+- URI SPA : https://xaviouk.github.io/corbe44-signature-mobile/auth.html
+- Autorisation Microsoft Graph déléguée : User.Read
+
+Déployer d'abord à un seul collaborateur. Confirmer dans Outlook mobile que le complément insère la signature et que les données du profil sont correctes.
