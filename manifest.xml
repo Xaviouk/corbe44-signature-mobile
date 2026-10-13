@@ -75,7 +75,6 @@
         <bt:ShortStrings>
           <bt:String id="residAppDesc" DefaultValue="Complément Outlook mobile de signature automatique CORBÉ 44."/>
         </bt:ShortStrings>
-        <bt:LongStrings/>
       </Resources>
     </VersionOverrides>
   </VersionOverrides>
