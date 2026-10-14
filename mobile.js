@@ -27,7 +27,7 @@ async function ensureMsalLoaded() {
       return;
     }
     const script = document.createElement("script");
-    script.src = "https://alcdn.msauth.net/browser/4.26.0/js/msal-browser.min.js";
+    script.src = "https://xaviouk.github.io/corbe-mobile-test/vendor/msal-browser.min.js";
     script.async = true;
     script.dataset.corbeMsal = "true";
     script.onload = resolve;
