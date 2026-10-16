@@ -341,7 +341,7 @@ function formatPhone(value) {
   const d = digits(value);
   if (d.length === 10) return d.match(/.{1,2}/g).join(" ");
   if (d.length === 11 && d.startsWith("33")) return "0" + d.slice(2).match(/.{1,2}/g).join(" ");
-  return value || "";
+  return String(value || "").trim();
 }
 function splitName(displayName, email) {
   const cleaned = String(displayName || "").trim();
@@ -369,7 +369,8 @@ function renderSignature(profile, graph) {
   const email = String((graph && (graph.mail || graph.userPrincipalName)) || profile.emailAddress || "").trim().toLowerCase();
   const displayName = splitName((graph && graph.displayName) || profile.displayName, email);
   const jobTitle = String((graph && graph.jobTitle) || "").trim();
-  const phoneRaw = String((graph && graph.mobilePhone) || (graph && graph.businessPhones && graph.businessPhones[0]) || "").trim();
+  // Mobile en priorité ; sinon premier téléphone professionnel.
+  const phoneRaw = String((graph && graph.mobilePhone) || (graph && Array.isArray(graph.businessPhones) && graph.businessPhones[0]) || "").trim();
   const phone = formatPhone(phoneRaw);
   const phoneDigits = digits(phoneRaw);
   // Aucune photo de secours : si l’e-mail manque, ne pas afficher de photo.
@@ -389,23 +390,27 @@ function renderSignature(profile, graph) {
 }
 
 function onNewMessageComposeHandler(event) {
-  const item = Office.context.mailbox.item;
-  const profile = Office.context.mailbox.userProfile || {};
-  getGraphProfile().then(graph => {
-    const signatureHtml = renderSignature(profile, graph);
-    item.body.setSignatureAsync(signatureHtml, { coercionType: Office.CoercionType.Html }, result => {
-      if (result.status === Office.AsyncResultStatus.Failed) {
-        console.log("Échec ajout signature CORBE 44 : " + result.error.message);
-      }
-      event.completed();
+  let completed = false;
+  const finish = () => { if (!completed) { completed = true; event.completed(); } };
+  try {
+    const item = Office.context.mailbox.item;
+    const profile = Office.context.mailbox.userProfile || {};
+    getGraphProfile().then(graph => {
+      if (!graph) console.warn("CORBE44 : profil Graph indisponible ; téléphone et fonction ne seront pas renseignés.");
+      const signatureHtml = renderSignature(profile, graph);
+      item.body.setSignatureAsync(signatureHtml, { coercionType: Office.CoercionType.Html }, result => {
+        if (result.status === Office.AsyncResultStatus.Failed) {
+          console.log("Échec insertion signature CORBÉ 44 : " + ((result.error && result.error.message) || "erreur inconnue"));
+        }
+        finish();
+      });
+    }).catch(error => {
+      console.warn("Erreur inattendue Graph ; insertion avec les données Outlook.", error);
+      item.body.setSignatureAsync(renderSignature(profile, null), { coercionType: Office.CoercionType.Html }, () => finish());
     });
-  }).catch(error => {
-    console.log("Erreur de préparation signature CORBE 44 :", error);
-    const signatureHtml = renderSignature(profile, null);
-    item.body.setSignatureAsync(signatureHtml, { coercionType: Office.CoercionType.Html }, result => {
-      if (result.status === Office.AsyncResultStatus.Failed) console.log(result.error.message);
-      event.completed();
-    });
-  });
+  } catch (error) {
+    console.log("Erreur gestionnaire signature CORBÉ 44 :", error);
+    finish();
+  }
 }
 Office.actions.associate("onNewMessageComposeHandler", onNewMessageComposeHandler);
